@@ -4,7 +4,7 @@
   <!ENTITY author      "RickyGrassmuck">
   <!ENTITY version     "2026.03.23">
   <!ENTITY launch      "VMs">
-  <!ENTITY pluginURL   "https://raw.githubusercontent.com/RickyGrassmuck/unraid-vm-interface-enhanced/master">
+  <!ENTITY pluginURL   "https://raw.githubusercontent.com/RickyGrassmuck/unraid-vm-interface-enhanced/main">
   <!ENTITY source      "/boot/config/plugins/&name;/&name;-&version;.txz">
   <!ENTITY sha256      "1f2851b2061f12ea6c98b607b1b745e9d6c967f75da01f1d15397848fb39440a">
 ]>
