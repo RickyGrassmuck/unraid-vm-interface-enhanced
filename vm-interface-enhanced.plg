@@ -16,7 +16,7 @@
   launch="&launch;"
   pluginURL="&pluginURL;/&name;.plg"
   support="https://forums.unraid.net"
-  min="6.12"
+  min="7.2.4"
   max="">
 
 <CHANGES>
