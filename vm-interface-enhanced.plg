@@ -17,7 +17,6 @@
   pluginURL="&pluginURL;/&name;.plg"
   support="https://forums.unraid.net"
   min="7.2.4"
-  max="">
 
 <CHANGES>
 ###2026.03.23
