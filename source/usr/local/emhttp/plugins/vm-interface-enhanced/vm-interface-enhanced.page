@@ -1,0 +1,24 @@
+Menu="VMs:99"
+Tag="fa-magic"
+Title="VM Enhanced (hidden)"
+---
+<?php
+/* vm-interface-enhanced.page
+ * Injected into the VMs page to load enhancement CSS and JS.
+ * This tab is intentionally left blank — the assets below do all the work.
+ */
+
+$docroot = $docroot ?? $_SERVER['DOCUMENT_ROOT'] ?? '/usr/local/emhttp';
+
+// Version bust: use filemtime so browsers always get updated assets.
+$css_v = @filemtime("$docroot/plugins/vm-interface-enhanced/sheets/vm-enhanced.css")    ?: 1;
+$js_v  = @filemtime("$docroot/plugins/vm-interface-enhanced/javascript/vm-enhanced.js") ?: 1;
+?>
+<link  rel="stylesheet"
+       href="/plugins/vm-interface-enhanced/sheets/vm-enhanced.css?v=<?=$css_v?>"
+       type="text/css">
+<script src="/plugins/vm-interface-enhanced/javascript/vm-enhanced.js?v=<?=$js_v?>"
+        defer></script>
+
+<?php /* No visible tab content — this page exists only to inject assets. */ ?>
+<div style="display:none;" id="vm-interface-enhanced-loaded"></div>

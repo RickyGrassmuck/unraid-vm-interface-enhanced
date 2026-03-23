@@ -1,0 +1,68 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+  <!ENTITY name        "vm-interface-enhanced">
+  <!ENTITY author      "RickyGrassmuck">
+  <!ENTITY version     "2026.03.23">
+  <!ENTITY launch      "VMs">
+  <!ENTITY pluginURL   "https://raw.githubusercontent.com/RickyGrassmuck/unraid-vm-interface-enhanced/master">
+  <!ENTITY source      "/boot/config/plugins/&name;/&name;-&version;.txz">
+  <!ENTITY sha256      "1f2851b2061f12ea6c98b607b1b745e9d6c967f75da01f1d15397848fb39440a">
+]>
+
+<PLUGIN
+  name="&name;"
+  author="&author;"
+  version="&version;"
+  launch="&launch;"
+  pluginURL="&pluginURL;/&name;.plg"
+  support="https://forums.unraid.net"
+  min="6.12"
+  max="">
+
+<CHANGES>
+###2026.03.23
+- Initial release
+- Always-visible edit indicators on inline-editable VM fields
+- State-based row colouring (running / paused / suspended / crashed)
+- State badge next to each VM name
+- Keyboard accessibility for editable fields
+- Subtle row hover highlight
+</CHANGES>
+
+<!--
+  ============================================================
+  Main package — built from source/usr/local/emhttp/plugins/…
+  ============================================================
+-->
+<FILE Name="&source;" Run="upgradepkg --install-new">
+  <URL>&pluginURL;/&name;-&version;.txz</URL>
+  <SHA256>&sha256;</SHA256>
+</FILE>
+
+<!--
+  ============================================================
+  Post-install: nothing extra needed; the .page file is auto-
+  discovered by Unraid's webGUI on next page load.
+  ============================================================
+-->
+<FILE Run="/bin/bash">
+<INLINE>
+echo "VM Interface Enhanced v&version; installed."
+echo "Reload the VMs page in your browser to activate."
+</INLINE>
+</FILE>
+
+<!--
+  ============================================================
+  Removal
+  ============================================================
+-->
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+removepkg &name; 2>/dev/null
+rm -rf /usr/local/emhttp/plugins/&name; /boot/config/plugins/&name;
+echo "VM Interface Enhanced removed."
+</INLINE>
+</FILE>
+
+</PLUGIN>

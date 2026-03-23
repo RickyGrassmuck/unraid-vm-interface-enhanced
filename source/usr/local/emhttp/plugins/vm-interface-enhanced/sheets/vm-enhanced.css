@@ -1,0 +1,188 @@
+/* ===================================================================
+   VM Interface Enhanced - CSS
+   Improves visibility of VM information and modifiable fields
+   =================================================================== */
+
+/* ------------------------------------------------------------------
+   Editable field indicators (.text = inline-edit trigger elements)
+   ------------------------------------------------------------------ */
+
+/* Always show a visual hint that .text elements are clickable/editable */
+#kvm_list .text {
+  cursor: pointer;
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.25);
+  padding-right: 16px;
+  position: relative;
+  display: inline-block;
+  min-width: 1em;
+  min-height: 1.1em;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* Pencil icon via ::after pseudo-element */
+#kvm_list .text::after {
+  content: '\f040'; /* fa-pencil */
+  font-family: FontAwesome;
+  font-size: 0.72em;
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.35;
+  color: #555;
+  pointer-events: none;
+}
+
+#kvm_list .text:hover {
+  background-color: rgba(0, 100, 200, 0.08);
+  border-bottom-color: rgba(0, 100, 200, 0.6);
+  border-radius: 3px 3px 0 0;
+}
+
+#kvm_list .text:hover::after {
+  opacity: 0.9;
+  color: #0064c8;
+}
+
+/* Active input field (shown after clicking .text) */
+#kvm_list .input {
+  border: 1px solid #0064c8 !important;
+  border-radius: 3px !important;
+  padding: 2px 6px !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0 2px rgba(0, 100, 200, 0.15) !important;
+  outline: none !important;
+}
+
+/* ------------------------------------------------------------------
+   VM status row coloring (state classes are on the <tr> element)
+   ------------------------------------------------------------------ */
+
+/* Running - green tint */
+#kvm_list tr[class*="running"] td,
+#kvm_list tr.vm-state-running td {
+  background-color: rgba(0, 168, 72, 0.04) !important;
+}
+
+/* Paused - amber tint */
+#kvm_list tr[class*="paused"] td,
+#kvm_list tr.vm-state-paused td {
+  background-color: rgba(230, 130, 0, 0.05) !important;
+}
+
+/* Suspended (pmsuspended) - blue tint */
+#kvm_list tr[class*="pmsuspended"] td,
+#kvm_list tr.vm-state-suspended td {
+  background-color: rgba(80, 80, 200, 0.05) !important;
+}
+
+/* Crashed / error - red tint */
+#kvm_list tr[class*="crashed"] td,
+#kvm_list tr.vm-state-crashed td {
+  background-color: rgba(200, 30, 30, 0.05) !important;
+}
+
+/* ------------------------------------------------------------------
+   Inline state badge (injected by JS next to the status icon)
+   ------------------------------------------------------------------ */
+
+.vmie-state-badge {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  vertical-align: middle;
+  margin-left: 6px;
+  line-height: 1.6;
+}
+
+.vmie-state-badge.vmie-running  { background: #d4f5e2; color: #1a6e35; border: 1px solid #1a6e35; }
+.vmie-state-badge.vmie-stopped  { background: #f0f0f0; color: #555;    border: 1px solid #aaa;    }
+.vmie-state-badge.vmie-paused   { background: #fff3d6; color: #8a4c00; border: 1px solid #c47000; }
+.vmie-state-badge.vmie-suspended{ background: #e8eaf6; color: #3535a0; border: 1px solid #3535a0; }
+.vmie-state-badge.vmie-crashed  { background: #fde8e8; color: #a01010; border: 1px solid #a01010; }
+
+/* ------------------------------------------------------------------
+   VM name cell - make names more prominent
+   ------------------------------------------------------------------ */
+
+#kvm_list td.vm-name a {
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
+   Row hover - universal highlight on any VM row
+   ------------------------------------------------------------------ */
+
+#kvm_list tr.sortable:hover > td {
+  background-color: rgba(0, 100, 200, 0.035) !important;
+}
+
+/* ------------------------------------------------------------------
+   Autostart column - give the toggle a little more breathing room
+   ------------------------------------------------------------------ */
+
+#kvm_table th.th3,
+#kvm_list td:last-child {
+  min-width: 80px;
+}
+
+/* ------------------------------------------------------------------
+   Column header emphasis
+   ------------------------------------------------------------------ */
+
+#kvm_table thead th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------
+   Description cell - never completely invisible
+   ------------------------------------------------------------------ */
+
+#kvm_list td.vm-description {
+  min-width: 60px;
+}
+
+#kvm_list td.vm-description .text:empty::before {
+  content: '—';
+  opacity: 0.3;
+  font-style: italic;
+  font-size: 0.85em;
+}
+
+/* ------------------------------------------------------------------
+   vDisks / vCDs cell - highlight the clickable media-change controls
+   ------------------------------------------------------------------ */
+
+#kvm_list select.cdrom-select {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+#kvm_list select.cdrom-select:hover {
+  border-color: #0064c8;
+}
+
+/* ------------------------------------------------------------------
+   IP address cell - monospace for readability
+   ------------------------------------------------------------------ */
+
+#kvm_list td .vm-ip,
+#kvm_list td [class*="ip"] {
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* ------------------------------------------------------------------
+   Child rows (expanded details) - subtle indent
+   ------------------------------------------------------------------ */
+
+#kvm_list tr[child-id] > td:first-child {
+  padding-left: 24px;
+}
